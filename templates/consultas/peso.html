@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<script>
+    const freq_abs = eval("{{ freq_abs | safe }}");
+    const freq_rel = eval("{{ freq_rel | safe }}");
+    const freq_acum = eval("{{ freq_acum | safe }}");   
+</script>
+
+<main class="container">
+    <header>
+        <h1>Reporte Estadístico de Peso</h1>
+        <p>Análisis visual y numérico de los datos de peso recolectados.</p>
+    </header>
+
+    <hr>
+
+    <section id="graficos">
+        <article class="chart-box">
+            <h2>1. Frecuencia Absoluta</h2>
+            <p>Muestra cuántas veces se repite cada peso en nuestro conjunto de datos.</p>
+            <div id="grafica-peso-absoluta"></div>
+            <button onclick="freq_abs_graph(freq_abs, 'grafica-peso-absoluta', 'num')" class="btn btn-primary">
+                Mostrar Barras
+            </button>
+        </article>
+
+        <article class="chart-box">
+            <h2>2. Frecuencia Relativa</h2>
+            <p>Representa el porcentaje o la proporción que ocupa cada peso respecto al total.</p>
+            <div id="grafica-peso-relativa"></div>
+            <button onclick="freq_rel_graph(freq_rel, 'grafica-peso-relativa', 'num')" class="btn btn-primary">
+                Mostrar Pastel
+            </button>
+        </article>
+
+        <article class="chart-box">
+            <h2>3. Frecuencia Acumulada</h2>
+            <p>Es la suma sucesiva de las frecuencias absolutas para observar cómo se van acumulando los datos.</p>
+            <div id="grafica-peso-acumulada"></div>
+            <button onclick="freq_acum_graph(freq_acum, 'grafica-peso-acumulada', 'num')" class="btn btn-primary">
+                Mostrar Acumulada
+            </button>
+        </article>
+
+        <article class="chart-box">
+            <h2>4. Polígono de Frecuencias</h2>
+            <p>Una línea continua que conecta los puntos centrales superiores de las barras de frecuencia absoluta.</p>
+            <div id="grafica-peso-poligono"></div>
+            <button onclick="pol_frec_graph(freq_abs, 'grafica-peso-poligono', 'num')" class="btn btn-primary">
+                Mostrar Polígono
+            </button>
+        </article>
+    </section>
+
+    <hr>
+
+    <section id="medidas">
+        <h2>Medidas de Tendencia Central</h2>
+        <p>Valores numéricos básicos que resumen el centro de la distribución de peso:</p>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Medida</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Media (Promedio)</strong></td>
+                    <td>{{ mean }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Mediana (Dato Central)</strong></td>
+                    <td>{{ median }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Moda (Más Repetido)</strong></td>
+                    <td>{{ mode }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <a href="/" class="btn btn-secondary">Regresar al Inicio</a>
+    </footer>
+</main>
+{% endblock %}

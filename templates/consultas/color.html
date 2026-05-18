@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<script>
+    const freq_abs = eval("{{ freq_abs | safe }}");
+    const freq_rel = eval("{{ freq_rel | safe }}");
+    const freq_acum = eval("{{ freq_acum | safe }}");   
+</script>
+
+<main class="container">
+    <header>
+        <h1>Reporte Estadístico de Color</h1>
+        <p>Análisis visual y numérico de las variables cualitativas de color recolectadas.</p>
+    </header>
+
+    <hr>
+
+    <section id="graficos">
+        <article class="chart-box">
+            <h2>1. Frecuencia Absoluta</h2>
+            <p>Muestra cuántas veces se repite cada color dentro del conjunto de datos.</p>
+            <div id="grafica-color-absoluta"></div>
+            <button onclick="freq_abs_graph(freq_abs, 'grafica-color-absoluta', 'char')" class="btn btn-primary">
+                Mostrar Barras
+            </button>
+        </article>
+
+        <article class="chart-box">
+            <h2>2. Frecuencia Relativa</h2>
+            <p>Representa el porcentaje o la proporción que equivale cada color respecto al total de la muestra.</p>
+            <div id="grafica-color-relativa"></div>
+            <button onclick="freq_rel_graph(freq_rel, 'grafica-color-relativa', 'char')" class="btn btn-primary">
+                Mostrar Pastel
+            </button>
+        </article>
+
+        <article class="chart-box">
+            <h2>3. Frecuencia Acumulada</h2>
+            <p>Es la suma consecutiva de las frecuencias para observar cómo se van acumulando las categorías de color.</p>
+            <div id="grafica-color-acumulada"></div>
+            <button onclick="freq_acum_graph(freq_acum, 'grafica-color-acumulada', 'char')" class="btn btn-primary">
+                Mostrar Acumulada
+            </button>
+        </article>
+
+        <article class="chart-box">
+            <h2>4. Polígono de Frecuencias</h2>
+            <p>Línea continua que une las frecuencias de las distintas categorías de color.</p>
+            <div id="grafica-color-poligono"></div>
+            <button onclick="pol_frec_graph(freq_abs, 'grafica-color-poligono', 'char')" class="btn btn-primary">
+                Mostrar Polígono
+            </button>
+        </article>
+    </section>
+
+    <hr>
+
+    <section id="medidas">
+        <h2>Medidas de Tendencia Central</h2>
+        <p>Valores estadísticos descriptivos para la distribución de los colores:</p>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Medida</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Media (Promedio)</strong></td>
+                    <td>{{ mean }}</td> </tr>
+                <tr>
+                    <td><strong>Mediana (Centro de los Datos)</strong></td>
+                    <td>{{ median }}</td> </tr>
+                <tr>
+                    <td><strong>Moda (Color Más Común)</strong></td>
+                    <td>{{ mode }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <a href="/" class="btn btn-secondary">Regresar al Inicio</a>
+    </footer>
+</main>
+{% endblock %}

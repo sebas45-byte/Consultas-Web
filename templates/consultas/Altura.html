@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<script>
+    const freq_abs = eval("{{ freq_abs | safe }}");
+    const freq_rel = eval("{{ freq_rel | safe }}");
+    const freq_acum = eval("{{ freq_acum | safe }}");   
+</script>
+
+<main class="container">
+    <header>
+        <h1>Reporte Estadístico de Altura</h1>
+        <p>Análisis visual y numérico de los datos recolectados.</p>
+    </header>
+
+    <hr>
+
+    <section id="graficos">
+        <article class="chart-box">
+            <h2>1. Frecuencia Absoluta</h2>
+            <p>Muestra cuántas veces se repite cada altura en nuestro grupo de datos.</p>
+            <div id="grafica-altura-absoluta"></div>
+            <button onclick="freq_abs_graph(freq_abs, 'grafica-altura-absoluta', 'num')" class="btn btn-primary">
+                Mostrar Barras
+            </button>
+        </article>
+
+        <article class="chart-box">
+            <h2>2. Frecuencia Relativa</h2>
+            <p>Representa el porcentaje o proporción que ocupa cada altura del total de los datos.</p>
+            <div id="grafica-altura-relativa"></div>
+            <button onclick="freq_rel_graph(freq_rel, 'grafica-altura-relativa', 'num')" class="btn btn-primary">
+                Mostrar Pastel
+            </button>
+        </article>
+
+        <article class="chart-box">
+            <h2>3. Frecuencia Acumulada</h2>
+            <p>Es la suma ordenada de las frecuencias absolutas para ver cómo se van sumando los datos.</p>
+            <div id="grafica-altura-acumulada"></div>
+            <button onclick="freq_acum_graph(freq_acum, 'grafica-altura-acumulada', 'num')" class="btn btn-primary">
+                Mostrar Acumulada
+            </button>
+        </article>
+
+        <article class="chart-box">
+            <h2>4. Polígono de Frecuencias</h2>
+            <p>Una línea continua que conecta los puntos más altos de las frecuencias absolutas.</p>
+            <div id="grafica-altura-poligono"></div>
+            <button onclick="pol_frec_graph(freq_abs, 'grafica-altura-poligono', 'num')" class="btn btn-primary">
+                Mostrar Polígono
+            </button>
+        </article>
+    </section>
+
+    <hr>
+
+    <section id="medidas">
+        <h2>Medidas de Tendencia Central</h2>
+        <p>Valores numéricos que resumen el centro de nuestra distribución de datos:</p>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Medida</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Media (Promedio)</strong></td>
+                    <td>{{ mean }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Mediana (Dato Central)</strong></td>
+                    <td>{{ median }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Moda (Más Repetido)</strong></td>
+                    <td>{{ mode }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <a href="/" class="btn btn-secondary">Regresar al Inicio</a>
+    </footer>
+</main>
+{% endblock %}
